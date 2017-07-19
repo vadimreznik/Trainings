@@ -1014,12 +1014,77 @@ body .markdown-body
     page-break-after: avoid;
   }
 }
-</style><title>config</title></head><body><article class="markdown-body"><h2 id="installation"><a name="user-content-installation" href="#installation" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Installation</h2>
-<pre><code class="javascript">npm install -g typescript
+</style><title>functions</title></head><body><article class="markdown-body"><h2 id="functuions"><a name="user-content-functuions" href="#functuions" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Functuions</h2>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Варианты создания функций</h3>
+<pre><code class="javascript">// Именованная
+function add(x, y){
+    return x + y;
+}
+
+// Анонимная
+let addFunc = function(x, y){ 
+    return x + y;
+};
+
 </code></pre>
 
-<h2 id="using"><a name="user-content-using" href="#using" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Using</h2>
-<pre><code class="javascript">tsc example.ts
+<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Области видимости</h3>
+<pre><code class="javascript">let x = 1;
+
+function(y){
+    return x + y;
+}
 </code></pre>
 
-<h2 id="configuration"><a name="user-content-configuration" href="#configuration" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Configuration</h2></article></body></html>
+<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Типизация функций</h3>
+<pre><code class="javascript">function add(x: number, y:number): number{
+    return x + y;
+}
+
+let addF: (a: number, b: number) =&gt; number =
+    function(x, y) { return x + y; };
+</code></pre>
+
+<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Опциональные и параметры по умолчанию</h3>
+<p><pre><code class="javascript">function getName(fName: string, lName: string){
+    return fName + ' ' + lName;
+}
+
+var man1 = getName('John');             // error
+var man2 = getName('John', 'D', 'Jr');  // error
+var man3 = getName('John', 'D');        // ok
+</code></pre><br />
+<pre><code class="javascript">function getName(fName: string, lName?: string){
+    return fName + ' ' + lName;
+}
+
+var man1 = getName('John');             // ok
+var man2 = getName('John', 'D', 'Jr');  // error
+var man3 = getName('John', 'D');        // ok
+</code></pre></p>
+<pre><code class="javascript">function getName(fName: string, lName = 'Woo'){
+    return fName + ' ' + lName;
+}
+
+var man1 = getName('John');             // ok
+var man2 = getName('John', 'D', 'Jr');  // error
+var man3 = getName('John', 'D');        // ok
+
+</code></pre>
+
+<h2 id="rest-parametrs"><a name="user-content-rest-parametrs" href="#rest-parametrs" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Rest Parametrs</h2>
+<pre><code class="javascript">function getName(fName: string, ...restOfName: string[]){
+    return fName + ' ' + restOfName.join(' ');
+}
+
+let name = getName('John', 'D', 'Woo', 'Jr');
+
+</code></pre>
+
+<h2 id="overloads"><a name="user-content-overloads" href="#overloads" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Overloads</h2>
+<pre><code class="javascript">function simpleFunc(n: number){}: string;
+function simpleFunc(n: string){}: string;
+
+simpleFunc(1);
+simpleFunc('1');
+</code></pre></article></body></html>
