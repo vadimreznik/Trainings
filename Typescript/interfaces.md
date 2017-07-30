@@ -142,3 +142,52 @@ class Clock implements ClockInterface {
     constructor(h: number, m: number) { }
 }
  ```
+
+ ## Extending Interfaces
+
+ ```javascript
+interface Shape {
+    color: string;
+}
+
+interface PenStroke {
+    penWidth: number;
+}
+
+interface Square extends Shape, PenStroke {
+    sideLength: number;
+}
+
+let square = <Square>{};
+square.color = "blue";
+square.sideLength = 10;
+square.penWidth = 5.0;
+ ```
+
+## Interfaces Extending Classes
+
+```javascript
+class Control {
+    private state: any;
+}
+
+interface SelectableControl extends Control {
+    select(): void;
+}
+
+class Button extends Control {
+    select() { }
+}
+
+class TextBox extends Control {
+    select() { }
+}
+
+class Image {
+    select() { }
+}
+
+class Location {
+    select() { }
+}
+```
